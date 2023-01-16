@@ -62,5 +62,26 @@
 }
 
 
+.card {
+  background-color: white;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  padding: 25px 25px 15px 25px;
+  transition: 0.3s;
+  color: black;
+}
+
+
+/* .card:hover {
+  box-shadow: 5px 1px 20px 1px #ddd;
+  transform: scale(0.96);
+} */
+
+h1 {  
+  text-decoration: underline;  
+  font-size:30px;  
+  
+  }
 
 
