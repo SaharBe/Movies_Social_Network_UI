@@ -4,12 +4,18 @@ import './index.css';
 import App from './App';
 import Mainscreen from './components/main-screen';
 import reportWebVitals from './reportWebVitals';
-
+import MyContextProvider from './my-context-provider'
+import MyChildComponent from './my-child-component'
+import UserId from './user-id';
+import UserIdProvider from './userid-provider'
+import Union from './union';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App/>
+    <UserIdProvider>
+      <Union/>
+    </UserIdProvider>
   </React.StrictMode>
 );
 

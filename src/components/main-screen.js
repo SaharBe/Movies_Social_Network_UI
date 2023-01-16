@@ -5,12 +5,23 @@ import React, { useState, useEffect } from 'react';
 import Login from './login';
 import SearchBar from './search-bar';
 import MainMenu from './main-menu';
-import userId from './user-id';
-function Mainscreen() {
+import UserId from '../user-id'
 
-   const [movies, setMovie] = useState([]);
+// import UserId from '../user-id';
+function Mainscreen(props) {
 
-  
+  const [movies, setMovie] = useState([]);
+  //  const { globalVariable, setGlobalVariable } = React.useContext(UserId);
+  // const { globalVariable, setGlobalVariable } = React.useContext(UserId);
+  //  const num = "4"
+  //  userId.userId_ = 4;
+
+ 
+  // Object.freeze(userId);
+
+  // userId.prop = 3;
+
+  // console.log(UserId)
 
   useEffect(()=>{
     fetch(`http://localhost:8080/Movies/4`, {
@@ -29,7 +40,7 @@ function Mainscreen() {
     <div className="App">
       
        <div className="layout">
-       <div>{userId.user_id}</div>
+       <div>fff</div>
        <div>
        <h1>
        <SearchBar/>

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import UserId from '../user-id'
+import UserId from './user-id'
+import MovieList from './components/movie-list';
+import SearchBar from './components/search-bar';
+import "./components/styles.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilm, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+export default function Union(props){
 
-import "./styles.css";
-
-function Login() {
-  // React States
+    // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -60,9 +63,9 @@ function Login() {
         // console.log(obj.user_id )
         // console.log(`${userId}`)
         // setGlobalVariable(userData.user_id)
-        setGlobalVariable("new value")
-        console.log(globalVariable)
-        window.location.href = `/movies/`
+        setGlobalVariable(userData.user_id)
+        console.log(globalVariable.value)
+        // window.location.href = `/movies/`
        
       }
     } else {
@@ -98,14 +101,72 @@ function Login() {
     </div>
   );
 
-  return (
-    <div className="app">
-      <div className="login-form">
-        <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
-      </div>
-    </div>
-  );
-}
+//   /////////////////////////////////////////////////////////////////////
 
-export default Login;
+  const [movies, setMovie] = useState([]);
+  //  const { globalVariable, setGlobalVariable } = React.useContext(UserId);
+//   const { globalVariable, setGlobalVariable } = React.useContext(UserId);
+  //  const num = "4"
+  //  userId.userId_ = 4;
+
+ 
+  // Object.freeze(userId);
+
+  // userId.prop = 3;
+
+  // console.log(UserId)
+
+  useEffect(()=>{
+    fetch(`http://localhost:8080/Movies/${globalVariable}`, {
+      method: 'GET',
+      header:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(resp => resp.json())
+    .then(resp => setMovie(resp))
+    .catch( error => console.log(error) )
+  }, [])
+    
+
+  const logoutUser = () => {
+    window.location.href= '/';
+  }
+ 
+  return(
+    <div>
+        <div>
+        <header className="App-header">
+        <h1>
+          <FontAwesomeIcon icon={faFilm} transform={{ rotate: 30 }} />
+          <span>Movies Social Network </span>
+          <FontAwesomeIcon icon={faSignOutAlt} fixedWidth   size="xs" pull="right" transform="shrink-6 left-4 up-10"  className={'logout'} onClick={logoutUser} />
+        </h1>  
+      </header> 
+        </div>
+    <div className="App">
+        <div className="layout"></div>
+        { parseInt(globalVariable) === 0 ?   
+        <div className="login-form">
+        <div className="title">Sign In</div>
+        {isSubmitted ? <div>{globalVariable}</div> : renderForm}
+      </div> :   <div>
+                    <div className="App">
+                    <div className="layout">
+                    <div>{globalVariable}</div>
+                    <div>
+                        <h1>
+                        <SearchBar/>
+                        </h1>
+                            <MovieList  movies={movies} />
+                            </div>
+                    </div>
+                    </div>
+                </div>
+          }     
+    </div>
+    </div>
+   
+  )
+
+}
