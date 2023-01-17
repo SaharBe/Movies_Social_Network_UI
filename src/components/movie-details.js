@@ -26,31 +26,3 @@ function MovieDetails(props){
 
 export default MovieDetails
 
- // const [highlighted, setHighlighted] = useState(-1);
-    
-    // const highlightLike = high => evt =>{
-    //     setHighlighted(high);
-    // }
-    
-    // const [like, setLike] = useState(100);
-    // const [likeActive, setLikeActive] = useState(false);
-
-    // function likef(){
-    //     if(likeActive){
-    //         setLikeActive(false);
-    //         setLike(like-1)
-    //     }else{
-    //         setLikeActive(true);
-    //         setLike(like+1)
-    //     }
-
-    // }
-
-
-                     {/* <FontAwesomeIcon icon={faHeart} size="2x"   className={likeActive  > 0  || highlighted > 0 ? 'red' : 'other'}
-                        onMouseEnter={highlightLike(1)}
-                        onMouseLeave={highlightLike(-1)}
-                        onClick={likef}
-                     />
-                     {like}
-     */}

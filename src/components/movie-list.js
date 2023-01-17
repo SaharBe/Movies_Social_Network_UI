@@ -1,36 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faX } from '@fortawesome/free-solid-svg-icons';
 import '../App.css'
-import styled from 'styled-components';
 import Table from 'react-bootstrap/Table'
+import { API } from '../rest-api-service';
 
 
-const HoverText = styled.p`
-    color: #FFFFFF;
-    font-size: 30px;
-    background-color: #808080;
-    text-align: center;
-    border-radius: 12px;
-    :hover {
-        background-color: #696969;
-        cursor: pointer;
-    }
- `
 
 function MovieList(props){
 
-    // const movieClicked = movie => evt => {
-    //     props.movieClicked(movie)
-    // }
-    // const styles = StyleSheet.create({
-    //     bold: {fontWeight: 'bold'},
-    //     italic: {fontStyle: 'italic'},
-    //     underline: {textDecorationLine: 'underline'}
-    // })
-
-    const shoot = () => {
-        alert("Great Shot!");
+   
+    function sendLikeChange(movieID, userID){
+        //alert(movieID);
+        API.sendLikeChange(movieID, userID);
     }
     
     return (
@@ -39,11 +21,13 @@ function MovieList(props){
         <div>
           { props.movies && props.movies.map( movie =>{
             return (<div  key={movie.movieId}>
-                       
+                         
                         <Table className='card'>
                             <thead>
+                           
                                 <th><h1 >{movie.title}</h1></th>
-                                <th><h2>{movie.number_of_likes}<FontAwesomeIcon icon={faHeart} onClick={shoot} className={movie.user_like === "true" ? 'red' : 'other'}/></h2></th>
+                                <th><h2>{movie.number_of_likes}<FontAwesomeIcon icon={faHeart} onClick={() => sendLikeChange(movie.movieId, props.userID)} className={movie.user_like === true ? 'red' : 'other'}/></h2></th>
+                               
                                 
                             </thead>
                             <tbody>
@@ -57,18 +41,26 @@ function MovieList(props){
                                 </tr>
                                 <tr>
                                     <td><h3>Budget:</h3></td>
-                                    <td><p>{movie.budget === 0 ?  <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.budget}</p>}</p></td>
+                                    <td><p>{movie.budget === 0 ?  <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.budget}$</p>}</p></td>
                                 </tr>
                                 <tr>
                                     <td><h3>Revenue:</h3></td>
-                                    <td><p>{movie.revenue === 0.0 ?  <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.revenue}</p>}</p></td>
+                                    <td><p>{movie.revenue === 0.0 ?  <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.revenue}$</p>}</p></td>
                                 </tr>
                                 <tr>
                                     <td><h3>Runtime</h3></td>
-                                    <td> <p>{movie.runtime === null? <p><FontAwesomeIcon icon={faX}/></p> : <p>movie.runtime</p>}</p></td>
+                                    <td> <p>{movie.runtime === null ? <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.runtime} minutes</p>}</p></td>
                                 </tr>
-
-                                <p>{movie.user_like === "true" ? <p>I like it!</p> : <p>not liked</p>}</p>
+                                <tr>
+                                    <td>
+                                    <p><h3>Movie ID:</h3></p>    
+                                    </td>
+                                    <td>
+                                    <p>{movie.movieId}</p>
+                                    </td>
+                                </tr>
+                               <p>{props.userID}</p>
+                                <p>{movie.user_like === true ? <p>I like it!</p> : <p>not liked</p>}</p>
                                 
                             </tbody>
                         </Table>

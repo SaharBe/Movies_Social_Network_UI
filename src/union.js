@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import UserId from './user-id'
 import MovieList from './components/movie-list';
+import MoviesFilter from './components/movies-filter';
 import SearchBar from './components/search-bar';
 import "./components/styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilm, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+
 export default function Union(props){
 
     // React States
@@ -13,8 +15,6 @@ export default function Union(props){
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { globalVariable, setGlobalVariable } = React.useContext(UserId);
-  // const { globalVariable, setGlobalVariable } = React.useContext(UserId);
-  // const [globalVariable, setGlobalVariable] = React.useState("init");
 
   // User Login info
   const database = [
@@ -58,15 +58,10 @@ export default function Union(props){
         setErrorMessages({ name: "pass", message: errors.pass });
       } else {
         setIsSubmitted(true);
-        // obj.user_id =  userData.user_id
-        // Object.freeze(obj.user_id)
-        // console.log(obj.user_id )
-        // console.log(`${userId}`)
-        // setGlobalVariable(userData.user_id)
+
         setGlobalVariable(userData.user_id)
         console.log(globalVariable.value)
-        // window.location.href = `/movies/`
-       
+
       }
     } else {
       // Username not found
@@ -104,29 +99,27 @@ export default function Union(props){
 //   /////////////////////////////////////////////////////////////////////
 
   const [movies, setMovie] = useState([]);
-  //  const { globalVariable, setGlobalVariable } = React.useContext(UserId);
-//   const { globalVariable, setGlobalVariable } = React.useContext(UserId);
-  //  const num = "4"
-  //  userId.userId_ = 4;
 
- 
-  // Object.freeze(userId);
-
-  // userId.prop = 3;
-
-  // console.log(UserId)
 
   useEffect(()=>{
-    fetch(`http://localhost:8080/Movies/${globalVariable}`, {
-      method: 'GET',
-      header:{
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(resp => resp.json())
-    .then(resp => setMovie(resp))
-    .catch( error => console.log(error) )
-  }, [])
+
+    const intervalId = setInterval(() => {
+
+        fetch(`http://localhost:8080/movies/${globalVariable}`, {
+        method: 'GET',
+        header:{
+            'Content-Type': 'application/json'
+        }
+        })
+        .then(resp => resp.json())
+        .then(resp => setMovie(resp))
+        .catch( error => console.log(error) )
+
+    }, 100)
+
+    return () => clearInterval(intervalId); //This is important
+
+  }, [globalVariable])
     
 
   const logoutUser = () => {
@@ -153,13 +146,9 @@ export default function Union(props){
       </div> :   <div>
                     <div className="App">
                     <div className="layout">
+                    <MoviesFilter userID={globalVariable} movies={movies}/>
                     <div>{globalVariable}</div>
-                    <div>
-                        <h1>
-                        <SearchBar/>
-                        </h1>
-                            <MovieList  movies={movies} />
-                            </div>
+                
                     </div>
                     </div>
                 </div>
