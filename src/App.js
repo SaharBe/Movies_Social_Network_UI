@@ -1,7 +1,6 @@
 import './App.css';
 import React from 'react';
 import Login from './components/login';
-import Mainscreen from './components/main-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilm, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { BrowserRouter as Router, Route, } from 'react-router-dom';
@@ -23,7 +22,7 @@ function App() {
         </h1>  
       </header>
     <Router>
-        <Route exact path= {`/movies`} component={Mainscreen} />
+      
         <Route exact path={`/`} component={Login} />
     </Router>
     </div>

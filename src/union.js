@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import UserId from './user-id'
 import MovieList from './components/movie-list';
 import MoviesFilter from './components/movies-filter';
-import SearchBar from './components/search-bar';
 import "./components/styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilm, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
