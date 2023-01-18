@@ -20,6 +20,7 @@ export default function MyQuery(props){
     const [valueOfFeature,setValueOfFeature]=useState('');
     const [valueOfMovieID,setValueOfMovieID]=useState('');
     const [queryName, setQueryName]=useState('');
+   
 
     const handleSelect=(e)=>{
 
@@ -38,34 +39,36 @@ export default function MyQuery(props){
         setValueOfMovieID(event.target.value);
     }
 
-    const setQuery = ()  => {
+    const SetQuery = ()  => {
        
-        if(queryName !=='' && valueOfMovieID !== '' ){
+        useEffect(()=>{
 
-            const intervalId = setInterval(() => {
-    
-                fetch(`http://localhost:8080/movies/query?query_name=${queryName}&user_id=${props.userID}&input=${valueOfMovieID}`, {
-                method: 'GET',
-                header:{
-                    'Content-Type': 'application/json'
-                }
-                })
-                .then(resp => resp.json())
-                .then(resp => setMovies(resp))
-                .catch( error => console.log(error) )
-        
-            }, 100)
-        
-            return () => clearInterval(intervalId); //This is important
+            if(queryName !=='' && valueOfMovieID !== '' ){
 
-        }
+                const intervalId = setInterval(() => {
+        
+                    fetch(`http://localhost:8080/movies/query?query_name=${queryName}&user_id=${props.userID}&input=${valueOfMovieID}`, {
+                    method: 'GET',
+                    header:{
+                        'Content-Type': 'application/json'
+                    }
+                    })
+                    .then(resp => resp.json())
+                    .then(resp => setMovies(resp))
+                    .catch( error => console.log(error) )
+            
+                }, 100)
+            
+                return () => clearInterval(intervalId); //This is important
+
+            }
+        },)   
         
     }
 
-    // useEffect(()=>{
+   
         
         
-    // }, )
 
 
     return(
@@ -93,7 +96,7 @@ export default function MyQuery(props){
                         ></input>
                 </Col>
                 
-              <Button  variant="success" onClick={setQuery()} >Choose feature</Button>{' '}
+              <Button  variant="success" onClick={SetQuery()} >Choose feature</Button>{' '}
             </Form>
 
             <div>
