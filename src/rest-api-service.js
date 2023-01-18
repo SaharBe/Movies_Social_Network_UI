@@ -20,6 +20,36 @@ export class API {
         }
     }
 
+    static async sendQuery(valueOfMovieID, valueOfFeature, userID){
+        
+        var queryName;
+
+  
+
+        switch (valueOfFeature) {
+            case "Language":   queryName="similarByLanguage" ;
+            break
+            case "Production Company": queryName="similarByCompany";
+            break
+            // case "Title": ;
+            default: queryName= null;
+        }
+        
+        try {
+            const resp = await fetch(backEndUrl+`movies/query?query_name=${queryName}&user_id=${userID}&input=${valueOfMovieID}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+
+                },
+            });
+            return await resp.json();
+        } catch (error) {
+            return console.log(error);
+        }
+    }
+
+
 
 
 }

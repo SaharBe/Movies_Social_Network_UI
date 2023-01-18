@@ -33,7 +33,7 @@ function MovieList(props){
                             <tbody>
                                 <tr>
                                     <td><h3>Production Company:</h3></td>
-                                    <td><p>{movie.production_company}</p></td>
+                                    <td><p>{movie.production_company === [] ?  <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.production_company}</p>}</p></td>
                                 </tr>
                                 <tr>
                                     <td><h3>Original language:</h3></td>
