@@ -50,6 +50,27 @@ export class API {
     }
 
 
+    static async sendUserData(uname,pass){
+
+        var data = JSON.stringify({user_name: uname, password: pass});
+    
+        try {
+            const resp = await fetch(backEndUrl+"/login", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: data
+                
+            })
+            //console.log(resp.json());
+            return await resp.json();
+        } catch (error) {
+            return console.log(error);
+        }
+    }
+
+
 
 
 }

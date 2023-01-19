@@ -12,42 +12,27 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 
-export default function MyQuery(props){
 
-    const moviesFeatures  = ["Language","Title","Production Company"];
+export default function QueryUserLike(props){
+
+    const [valueOfAnotherUser,setValueOfAnotherUser] =useState('');
+
     const [movies, setMovies] = useState([]);
 
-    const [valueOfFeature,setValueOfFeature]=useState('');
-    const [valueOfMovieID,setValueOfMovieID]=useState('');
-    const [queryName, setQueryName]=useState('');
-   
-
-    const handleSelect=(e)=>{
-
-        switch(e){
-            case "Language":  setQueryName("similarByLanguage") ;
-            break;
-            case "Production Company": setQueryName("similarByCompany");
-            break;
-            default: setQueryName('');
-
-        }
-        setValueOfFeature(e)
-    }
 
     const handleInputChange=(event)=>{
-        setValueOfMovieID(event.target.value);
+        setValueOfAnotherUser(event.target.value);
     }
+
 
     const SetQuery = ()  => {
        
         useEffect(()=>{
-
-            if(queryName !=='' && valueOfMovieID !== '' ){
+        if(valueOfAnotherUser !== '' ){
 
                 const intervalId = setInterval(() => {
         
-                    fetch(`http://localhost:8080/movies/query?query_name=${queryName}&user_id=${props.userID}&input=${valueOfMovieID}`, {
+                    fetch(`http://localhost:8080/movies/query?query_name=byUserName&user_id=${props.userID}&input=${valueOfAnotherUser}`, {
                     method: 'GET',
                     header:{
                         'Content-Type': 'application/json'
@@ -66,35 +51,21 @@ export default function MyQuery(props){
         
     }
 
-   
-        
-        
+
 
 
     return(
         <div>
             <Form>
-                <DropdownButton 
-                className='mr-1'
-                type='text'
-                title={"Similar by: " + valueOfFeature}
-                variant="success"
-                onSelect={handleSelect}
-                >
-                  {moviesFeatures.map(movieField => {
-                    return(
-                      <Dropdown.Item eventKey={movieField}>{movieField}</Dropdown.Item>)
-                  })}
-                </DropdownButton>
-
-                <Col xs={4}>
+                
+                <div xs={4}>
                         <input 
                             className="form-control"
-                            placeholder="movie id"
+                            placeholder="Enter username"
                             type="text"
                             onChange={handleInputChange}
                         ></input>
-                </Col>
+                </div>
                 
               <Button  variant="success" onClick={SetQuery()} >Choose feature</Button>{' '}
             </Form>
@@ -105,5 +76,5 @@ export default function MyQuery(props){
         </div>
     )  
 
-}
 
+}

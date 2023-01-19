@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faX } from '@fortawesome/free-solid-svg-icons';
-import '../App.css'
-import Table from 'react-bootstrap/Table'
-import { API } from '../rest-api-service';
-import MovieList from './movie-list';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MyQuery from './query';
- 
+import MyQuery from './query-similar-as';
+import QueryUserLike from './query-user-like';
+import QueryAllMovies from './query-all-movies';
 
 export default function MoviesFilter(props){
 
@@ -19,18 +14,22 @@ export default function MoviesFilter(props){
         <div>
             <p>The current filter: {chosenFilter}</p>
             <button onClick={() => setChosenFilter(0)}>
-                filter zero 
+                All movies
             </button>
             <button onClick={() => setChosenFilter(1)}>
-                filter one 
+                Movies that are identical in a certain feature to a certain movie
+            </button>
+            <button onClick={() => setChosenFilter(2)}>
+                Movies that a certain user liked 
             </button>
             <div>{props.userID}</div>
          
             <div>
             {(() => {
                 switch (chosenFilter) {
-                case 0:   return <div><h1>This is The list of all movies:</h1><MovieList userID={props.userID} movies={props.movies} /></div> ;
+                case 0:   return <div><QueryAllMovies userID={props.userID}/></div> ;
                 case 1: return <div><MyQuery userID={props.userID}/></div>;
+                case 2: return <div><QueryUserLike userID={props.userID}/></div>
                 default: return <div>de</div>;
                 }
             })()}

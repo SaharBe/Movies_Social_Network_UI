@@ -6,42 +6,44 @@ import MoviesFilter from './components/movies-filter';
 import "./components/styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilm, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-
+import { API } from "./rest-api-service";
 export default function Union(props){
 
     // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+    const [errorMessages, setErrorMessages] = useState({});
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const { globalVariable, setGlobalVariable } = React.useContext(UserId);
+    const { globalVariable, setGlobalVariable } = React.useContext(UserId);
 
-  // User Login info
-  const database = [
+    const [userRequest, setUserRequest] = useState([]);
+
+   // User Login info
+    const database = [
     {
-      username: "user1",
-      password: "pass1",
-      user_id: "4"
+        username: "user1",
+        password: "pass1",
+        user_id: "4"
     },
     {
-      username: "user2",
-      password: "pass2",
-      user_id: "3"
+        username: "user2",
+        password: "pass2",
+        user_id: "3"
     },
     {
-      username: "junebug73",
-      password: "OHe6oMjK",
-      user_id: "2"
+        username: "junebug73",
+        password: "OHe6oMjK",
+        user_id: "2"
     }
-  ];
+    ];
 
-  const errors = {
+    const errors = {
     uname: "invalid username",
     pass: "invalid password"
-  };
+    };
 
  
 
-  const handleSubmit = (event) => {
+    const handleSubmit = (event) => {
     //Prevent page reload
     event.preventDefault();
 
@@ -49,6 +51,10 @@ export default function Union(props){
 
     // Find user login info
     const userData = database.find((user) => user.username === uname.value);
+
+    
+    let a = API.sendUserData(uname.value, pass.value);
+   console.log(a)
 
     // Compare user info
     if (userData) {
@@ -97,28 +103,28 @@ export default function Union(props){
 
 //   /////////////////////////////////////////////////////////////////////
 
-  const [movies, setMovie] = useState([]);
+//   const [movies, setMovie] = useState([]);
 
 
-  useEffect(()=>{
+//   useEffect(()=>{
 
-    const intervalId = setInterval(() => {
+//     const intervalId = setInterval(() => {
 
-        fetch(`http://localhost:8080/movies/${globalVariable}`, {
-        method: 'GET',
-        header:{
-            'Content-Type': 'application/json'
-        }
-        })
-        .then(resp => resp.json())
-        .then(resp => setMovie(resp))
-        .catch( error => console.log(error) )
+//         fetch(`http://localhost:8080/movies/query-no-input?user_id=${globalVariable}&query_name=movieBasicQuery`, {
+//         method: 'GET',
+//         header:{
+//             'Content-Type': 'application/json'
+//         }
+//         })
+//         .then(resp => resp.json())
+//         .then(resp => setMovie(resp))
+//         .catch( error => console.log(error) )
 
-    }, 100)
+//     }, 100)
 
-    return () => clearInterval(intervalId); //This is important
+//     return () => clearInterval(intervalId); //This is important
 
-  }, [globalVariable])
+//   }, [globalVariable])
     
 
   const logoutUser = () => {
@@ -136,6 +142,7 @@ export default function Union(props){
         </h1>  
       </header> 
         </div>
+\
     <div className="App">
         <div className="layout"></div>
         { parseInt(globalVariable) === 0 ?   
@@ -145,7 +152,7 @@ export default function Union(props){
       </div> :   <div>
                     <div className="App">
                     <div className="layout">
-                    <MoviesFilter userID={globalVariable} movies={movies}/>
+                    <MoviesFilter userID={globalVariable} />
                     <div>{globalVariable}</div>
                 
                     </div>

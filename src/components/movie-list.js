@@ -33,7 +33,11 @@ function MovieList(props){
                             <tbody>
                                 <tr>
                                     <td><h3>Production Company:</h3></td>
-                                    <td><p>{movie.production_company === "[]" ?  <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.production_company}</p>}</p></td>
+                                    <td><p>{movie.production_company === "[]" ?  <p>UNKNOWN</p> : <p>{movie.production_company}</p>}</p></td>
+                                </tr>
+                                <tr>
+                                    <td><h3>Genre:</h3></td>
+                                    <td><p>{movie.genres.map( genre => { return (<div>{genre}</div>) })}</p></td>
                                 </tr>
                                 <tr>
                                     <td><h3>Original language:</h3></td>
@@ -41,15 +45,15 @@ function MovieList(props){
                                 </tr>
                                 <tr>
                                     <td><h3>Budget:</h3></td>
-                                    <td><p>{movie.budget === 0 ?  <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.budget}$</p>}</p></td>
+                                    <td><p>{movie.budget === 0 ?  <p>UNKNOWN</p> : <p>{movie.budget}$</p>}</p></td>
                                 </tr>
                                 <tr>
                                     <td><h3>Revenue:</h3></td>
-                                    <td><p>{movie.revenue === 0.0 ?  <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.revenue}$</p>}</p></td>
+                                    <td><p>{movie.revenue === 0.0 ?  <p>UNKNOWN</p> : <p>{movie.revenue}$</p>}</p></td>
                                 </tr>
                                 <tr>
                                     <td><h3>Runtime</h3></td>
-                                    <td> <p>{movie.runtime === null ? <p><FontAwesomeIcon icon={faX}/></p> : <p>{movie.runtime} minutes</p>}</p></td>
+                                    <td> <p>{movie.runtime === null ? <p>UNKNOWN</p> : <p>{movie.runtime} minutes</p>}</p></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -60,7 +64,7 @@ function MovieList(props){
                                     </td>
                                 </tr>
                                <p>{props.userID}</p>
-                                <p>{movie.user_like === true ? <p>I like it!</p> : <p>not liked</p>}</p>
+                                
                                 
                             </tbody>
                         </Table>
