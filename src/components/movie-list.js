@@ -15,11 +15,12 @@ function MovieList(props){
         API.sendLikeChange(movieID, userID);
     }
     
+   
     return (
         <div>
            
         <div>
-          { props.movies && props.movies.map( movie =>{
+          { props.movies && props.movies !== null && props.movies.map( movie =>{
             return (<div  key={movie.movieId}>
                          
                         <Table className='card'>
@@ -37,7 +38,7 @@ function MovieList(props){
                                 </tr>
                                 <tr>
                                     <td><h3>Genre:</h3></td>
-                                    <td><p>{movie.genres.map( genre => { return (<div>{genre}</div>) })}</p></td>
+                                    <td><p>{movie.genres !== null ? movie.genres.map( genre => { return (<div>{genre === null ? <p>UNKNOWN</p> : <p>{genre}</p>}</div>) }) :  <p>UNKNOWN</p> }</p></td>
                                 </tr>
                                 <tr>
                                     <td><h3>Original language:</h3></td>
