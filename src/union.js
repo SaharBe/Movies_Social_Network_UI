@@ -13,7 +13,10 @@ export default function Union(props){
 
     const { globalVariable, setGlobalVariable } = React.useContext(UserId);
 
-    // const [userRequest, setUserRequest] = useState([]);
+    // const [userRequest, setUserRequest] = useState('');
+    let x;
+    var y;
+    let regex = /\d+/;
 
    // User Login info
     const database = [
@@ -51,9 +54,34 @@ export default function Union(props){
     const userData = database.find((user) => user.username === uname.value);
 
     
-    let a = API.sendUserData(uname.value, pass.value);
-   console.log(a)
+    API.sendUserData(uname.value, pass.value).then(data => {
+      x =data;
+      console.log(x); // the resolved value is logged to the console
 
+      if (regex.test(x)) {
+        console.log("The string contains a number as a substring");
+      } else {
+          console.log(typeof(x));
+          console.log((Object.entries(x).slice(0,1)));
+          if(Object.entries(x).find(entry => typeof(entry[1]) === "number")) {
+            console.log(Object.entries(x)[0]);
+            console.log("shabat shalom");
+            y = Object.entries(x);
+            console.log(y);
+            console.log("shabat shalom");
+          } else {
+            console.log("The object does not contain the string 'John Doe'");
+          }
+      }
+
+      
+    });
+  //  console.log(a)
+
+    
+
+
+    
     // Compare user info
     if (userData) {
       if (userData.password !== pass.value) {
@@ -61,10 +89,7 @@ export default function Union(props){
         setErrorMessages({ name: "pass", message: errors.pass });
       } else {
         setIsSubmitted(true);
-
         setGlobalVariable(userData.user_id)
-        console.log(globalVariable.value)
-
       }
     } else {
       // Username not found

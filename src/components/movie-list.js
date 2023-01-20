@@ -7,7 +7,7 @@ import { API } from '../rest-api-service';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import { FixedSizeList as List } from 'react-window';
-
+import AutoSizer from "react-virtualized-auto-sizer";
 const LeftSide = styled.div`
   float: left;
   width: 33%;
@@ -41,8 +41,7 @@ function MovieList(props){
         API.sendLikeChange(movieID, userID);
     }
 
- 
-   
+
     return (
         <div>
             <div>
@@ -54,6 +53,7 @@ function MovieList(props){
         <div>
             
             <LeftSide>
+               
             { props.movies && props.movies !== null && props.movies.map( (movie, i) =>{
             return (<div  key={movie.movieId} index={i}>
                          <div>{i%3 === 0? <div>
@@ -64,9 +64,6 @@ function MovieList(props){
                                     <th><h1 >{movie.title}</h1></th>
                                     <th><h2>{movie.number_of_likes}<FontAwesomeIcon icon={faHeart} onClick={() => sendLikeChange(movie.movieId, props.userID)} className={movie.user_like === true ? 'red' : 'other'}/></h2></th>
                                 
-                                    
-                                
-                                    
                                 </thead>
                                 <tbody>
                                     <tr>
@@ -111,7 +108,7 @@ function MovieList(props){
                     </div>)
                 
           })}
-
+       
         </LeftSide >
 
         </div>
