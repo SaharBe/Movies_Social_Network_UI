@@ -8,29 +8,25 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
 
 
-export default function QueryUserLike(props){
 
-    const options  = ["All movies User Liked",
-                    "All movies from the Company that User liked the most", 
-                    "All movies from the Genre that User liked the most",
-                    "All movies  with Average Runtime User liked the moste"];
+export default function QueryRunTime(props){
+
+    const options = ["RunTime less than X minutes",
+                    "RunTime greater than X minutes"]
 
     const [movies, setMovies] = useState([]);
     const [option, setOption] = useState('');
-    const [valueOfAnotherUser,setValueOfAnotherUser] =useState('');
+    const [X,setX] =useState('');
     const [queryName, setQueryName]=useState('');
+    const [temp, setTemp] = useState([]);
 
 
     const handleSelect=(e)=>{
 
         switch(e){
-            case "All movies User Liked":  setQueryName("byUserName") ;
+            case "RunTime less than X minutes":  setQueryName("runTimeSmallerThan") ;
             break;
-            case "All movies from the company that User liked the most": setQueryName("moviesUserXLikedMostByCompany");
-            break;
-            case "All movies from the Genre that User liked the most": setQueryName("moviesUserXLikedMostByGenre");
-            break;
-            case "All movies  with Average Runtime User liked the moste": setQueryName("moviesUserXLikedByRuntimeAverage")
+            case "RunTime greater than X minutes": setQueryName("runTimeBiggerThan");
             break;
             default: setQueryName('');
 
@@ -38,22 +34,19 @@ export default function QueryUserLike(props){
         setOption(e)
     }
 
-    
     const handleInputChange=(event)=>{
-        setValueOfAnotherUser(event.target.value);
+        setX(event.target.value);
     }
-
 
     const SetQuery = ()  => {
 
         try{
-
             useEffect(()=>{
-                if(valueOfAnotherUser !== '' && queryName !== '' ){
+                if(X !== '' && queryName !== '' ){
         
                         const intervalId = setInterval(() => {
                 
-                            fetch(`http://localhost:8080/movies/query?query_name=${queryName}&user_id=${props.userID}&input=${valueOfAnotherUser}`, {
+                            fetch(`http://localhost:8080/movies/query?query_name=${queryName}&user_id=${props.userID}&input=${X}`, {
                             method: 'GET',
                             header:{
                                 'Content-Type': 'application/json'
@@ -74,12 +67,7 @@ export default function QueryUserLike(props){
             return console.log(error);
         }
        
-       
-        
     }
-
-
-
 
     return(
         <div>
@@ -88,7 +76,7 @@ export default function QueryUserLike(props){
             <DropdownButton 
                 className='mr-1'
                 type='text'
-                title={"Options: " +option}
+                title={"Options: " + option}
                 variant="success"
                 onSelect={handleSelect}
                 >
@@ -101,7 +89,7 @@ export default function QueryUserLike(props){
                 <div xs={4}>
                         <input 
                             className="form-control"
-                            placeholder="Enter username"
+                            placeholder="Enter X"
                             type="text"
                             onChange={handleInputChange}
                         ></input>
@@ -115,6 +103,7 @@ export default function QueryUserLike(props){
             </div>
         </div>
     )  
+
 
 
 }

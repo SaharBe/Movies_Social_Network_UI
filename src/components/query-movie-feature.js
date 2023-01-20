@@ -8,24 +8,27 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
 
 
-export default function MyQuery(props){
+export default function QueryMovieFeature(props){
 
-    const moviesFeatures  = ["Language","Production Company", "Genre"];
-    
+    const moviesFeatures  = ["Language","Production Company", "Genre", "Title / KeyWord"];
+
+
     const [movies, setMovies] = useState([]);
     const [valueOfFeature,setValueOfFeature]=useState('');
-    const [valueOfMovieID,setValueOfMovieID]=useState('');
     const [queryName, setQueryName]=useState('');
-   
+    const [ input, setInput] = useState('');
+
 
     const handleSelect=(e)=>{
 
         switch(e){
-            case "Language":  setQueryName("similarByLanguage") ;
+            case "Language":  setQueryName("byLanguage") ;
             break;
-            case "Production Company": setQueryName("similarByCompany");
+            case "Production Company": setQueryName("byCompany");
             break;
-            case "Genre": setQueryName("allMoviesFromSameGenreLikeMovieId");
+            case "Genre": setQueryName("byGenre");
+            break;
+            case "Title / KeyWord": setQueryName("movieNameContainsOrKeyword");
             break;
             default: setQueryName('');
 
@@ -34,19 +37,19 @@ export default function MyQuery(props){
     }
 
     const handleInputChange=(event)=>{
-        setValueOfMovieID(event.target.value);
+        setInput(event.target.value);
     }
 
     const SetQuery = ()  => {
-
+       
         try{
             useEffect(()=>{
 
-                if(queryName !=='' && valueOfMovieID !== '' ){
+                if(queryName !=='' && input !== '' ){
     
                     const intervalId = setInterval(() => {
-            
-                        fetch(`http://localhost:8080/movies/query?query_name=${queryName}&user_id=${props.userID}&input=${valueOfMovieID}`, {
+    
+                        fetch(`http://localhost:8080/movies/query-like?query_name=${queryName}&user_id=${props.userID}&input=${input}`, {
                         method: 'GET',
                         header:{
                             'Content-Type': 'application/json'
@@ -61,15 +64,14 @@ export default function MyQuery(props){
                     return () => clearInterval(intervalId); //This is important
     
                 }
-            },)   
+            },)      
 
         }catch(error){
             return console.log(error);
         }
- 
+        
     }
 
-   
     return(
         <div>
             <Form>
@@ -105,4 +107,3 @@ export default function MyQuery(props){
     )  
 
 }
-

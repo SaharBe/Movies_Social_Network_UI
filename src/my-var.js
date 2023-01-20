@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
-
+import React from 'react';
 
   // Create a new context object
 const MyContext = React.createContext();

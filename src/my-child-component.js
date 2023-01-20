@@ -1,7 +1,6 @@
 // Use the context in a child component
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import MyContext from './my-var'
-import MyContextProvider from './my-context-provider'
 
 export default function MyChildComponent() {
     const { globalVariable, setGlobalVariable } = React.useContext(MyContext);

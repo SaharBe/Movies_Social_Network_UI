@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from "react";
 import UserId from './user-id'
-import MovieList from './components/movie-list';
 import MoviesFilter from './components/movies-filter';
 import "./components/styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +13,7 @@ export default function Union(props){
 
     const { globalVariable, setGlobalVariable } = React.useContext(UserId);
 
-    const [userRequest, setUserRequest] = useState([]);
+    // const [userRequest, setUserRequest] = useState([]);
 
    // User Login info
     const database = [
@@ -102,30 +100,6 @@ export default function Union(props){
   );
 
 //   /////////////////////////////////////////////////////////////////////
-
-//   const [movies, setMovie] = useState([]);
-
-
-//   useEffect(()=>{
-
-//     const intervalId = setInterval(() => {
-
-//         fetch(`http://localhost:8080/movies/query-no-input?user_id=${globalVariable}&query_name=movieBasicQuery`, {
-//         method: 'GET',
-//         header:{
-//             'Content-Type': 'application/json'
-//         }
-//         })
-//         .then(resp => resp.json())
-//         .then(resp => setMovie(resp))
-//         .catch( error => console.log(error) )
-
-//     }, 100)
-
-//     return () => clearInterval(intervalId); //This is important
-
-//   }, [globalVariable])
-    
 
   const logoutUser = () => {
     window.location.href= '/';
