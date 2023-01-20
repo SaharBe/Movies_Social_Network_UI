@@ -99,7 +99,7 @@ export default function MyQuery(props){
             </Form>
 
             <div>
-            <h1>Similar List:</h1><MovieList userID={props.userID} movies={movies} />
+             <MovieList userID={props.userID} movies={movies} />
             </div>
         </div>
     )  

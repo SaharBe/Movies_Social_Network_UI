@@ -2,8 +2,8 @@
   padding: 20px;
   min-height: 100vh;
   text-align: center;
-  background-color: #282c34;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 
@@ -12,7 +12,8 @@
   justify-content: center;
   text-align: center;
   font-size: calc(10px + 2vmin);
-  
+ 
+  color: black;
   
 }
 
@@ -63,25 +64,100 @@
 
 
 .card {
-  background-color: white;
-  border-radius: 4px;
-  margin-top: 8px;
-  margin-bottom: 5px;
+  background-color: rgb(26, 13, 100);
+  border-radius: 30px;
+  margin-top: 20px;
+  margin-bottom: 40px;
   padding: 25px 25px 15px 25px;
   transition: 0.3s;
-  color: black;
+  color: rgb(211, 205, 205);
 }
 
 
-/* .card:hover {
-  box-shadow: 5px 1px 20px 1px #ddd;
-  transform: scale(0.96);
-} */
 
 h1 {  
   text-decoration: underline;  
   font-size:30px;  
   
-  }
+}
 
+.app {
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  background-color: #f8f9fd;
+}
+
+input[type="text"],
+input[type="password"] {
+  height: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+input[type="submit"] {
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  background: #01d28e;
+  border: 1px solid #01d28e;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+input[type="submit"]:hover {
+  background: #6cf0c2;
+}
+
+.signup{
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  background: #01d28e;
+  border: 1px solid #01d28e;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.signup:hover{
+  background: #6cf0c2;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: auto
+}
+
+.login-form {
+  background-color: white;
+  padding: 2rem;
+  
+  box-shadow: 0 4px 8px 0 rgba(219, 14, 14, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.list-container {
+  display: flex;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.title {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px;
+}
 

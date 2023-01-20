@@ -8,6 +8,7 @@ export default function QueryAllMovies(props){
 
 
     const [movies, setMovie] = useState([]);
+    const [query, setQuery] = useState('movieBasicQuery');
 
     try{
         useEffect(()=>{
@@ -38,7 +39,7 @@ export default function QueryAllMovies(props){
   
     return(
         <div>
-            <h1>This is The list of all movies:</h1><MovieList userID={props.userID} movies={movies} />
+           <MovieList userID={props.userID} movies={movies} />
         </div> 
     )
     

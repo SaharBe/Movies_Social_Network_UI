@@ -91,7 +91,7 @@ export default function QueryMovieFeature(props){
                 <div xs={4}>
                         <input 
                             className="form-control"
-                            placeholder="Enter movie id"
+                            placeholder={"Enter " + valueOfFeature}
                             type="text"
                             onChange={handleInputChange}
                         ></input>
@@ -101,7 +101,7 @@ export default function QueryMovieFeature(props){
             </Form>
 
             <div>
-            <h1>Similar List:</h1><MovieList userID={props.userID} movies={movies} />
+              <MovieList userID={props.userID} movies={movies} />
             </div>
         </div>
     )  

@@ -26,7 +26,7 @@ export default function QueryUserLike(props){
         switch(e){
             case "All movies User Liked":  setQueryName("byUserName") ;
             break;
-            case "All movies from the company that User liked the most": setQueryName("moviesUserXLikedMostByCompany");
+            case "All movies from the Company that User liked the most": setQueryName("moviesUserXLikedMostByCompany");
             break;
             case "All movies from the Genre that User liked the most": setQueryName("moviesUserXLikedMostByGenre");
             break;

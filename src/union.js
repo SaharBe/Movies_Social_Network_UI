@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UserId from './user-id'
 import MoviesFilter from './components/movies-filter';
-import "./components/styles.css";
+import "./App.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilm, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { API } from "./rest-api-service";
@@ -94,7 +94,10 @@ export default function Union(props){
         </div>
         <div className="button-container">
           <input type="submit" />
+          
         </div>
+
+        <button className="signup">Create a new account</button>
       </form>
     </div>
   );
@@ -112,20 +115,21 @@ export default function Union(props){
         <h1>
           <FontAwesomeIcon icon={faFilm} transform={{ rotate: 30 }} />
           <span>Movies Social Network </span>
-          <FontAwesomeIcon icon={faSignOutAlt} fixedWidth   size="xs" pull="right" transform="shrink-6 left-4 up-10"  className={'logout'} onClick={logoutUser} />
+          <FontAwesomeIcon icon={faSignOutAlt} fixedWidth   pull="right"   className={'logout'} onClick={logoutUser} />
         </h1>  
       </header> 
         </div>
 \
     <div className="App">
-        <div className="layout"></div>
         { parseInt(globalVariable) === 0 ?   
-        <div className="login-form">
+        <div className="App">
         <div className="title">Sign In</div>
-        {isSubmitted ? <div>{globalVariable}</div> : renderForm}
+       
+        {isSubmitted ? <div>{globalVariable}</div> : renderForm }
+         
       </div> :   <div>
                     <div className="App">
-                    <div className="layout">
+                    <div >
                     <MoviesFilter userID={globalVariable} />
                     <div>{globalVariable}</div>
                 

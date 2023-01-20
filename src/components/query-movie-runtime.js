@@ -18,8 +18,7 @@ export default function QueryRunTime(props){
     const [option, setOption] = useState('');
     const [X,setX] =useState('');
     const [queryName, setQueryName]=useState('');
-    const [temp, setTemp] = useState([]);
-
+  
 
     const handleSelect=(e)=>{
 
@@ -99,7 +98,7 @@ export default function QueryRunTime(props){
             </Form>
 
             <div>
-            <h1>Similar List:</h1><MovieList userID={props.userID} movies={movies} />
+               <MovieList userID={props.userID} movies={movies} />
             </div>
         </div>
     )  
