@@ -66,7 +66,7 @@ export class API {
             //console.log(resp.json());
             return await resp.json();
         } catch (error) {
-            return console.log(error);
+            return console.log("sahar");
         }
     }
 

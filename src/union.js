@@ -8,7 +8,7 @@ import { API } from "./rest-api-service";
 export default function Union(props){
 
     // React States
-    const [errorMessages, setErrorMessages] = useState({});
+    const [errorMessages, setErrorMessages] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const { globalVariable, setGlobalVariable } = React.useContext(UserId);
@@ -19,28 +19,28 @@ export default function Union(props){
     let regex = /\d+/;
 
    // User Login info
-    const database = [
-    {
-        username: "user1",
-        password: "pass1",
-        user_id: "4"
-    },
-    {
-        username: "user2",
-        password: "pass2",
-        user_id: "3"
-    },
-    {
-        username: "junebug73",
-        password: "OHe6oMjK",
-        user_id: "2"
-    }
-    ];
+    // const database = [
+    // {
+    //     username: "user1",
+    //     password: "pass1",
+    //     user_id: "4"
+    // },
+    // {
+    //     username: "user2",
+    //     password: "pass2",
+    //     user_id: "3"
+    // },
+    // {
+    //     username: "junebug73",
+    //     password: "OHe6oMjK",
+    //     user_id: "2"
+    // }
+    // ];
 
-    const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-    };
+    // const errors = {
+    // uname: "invalid username",
+    // pass: "invalid password"
+    // };
 
  
 
@@ -51,57 +51,67 @@ export default function Union(props){
     var { uname, pass } = document.forms[0];
 
     // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
+    //const userData = database.find((user) => user.username === uname.value);
 
     
     API.sendUserData(uname.value, pass.value).then(data => {
       x =data;
       console.log(x); // the resolved value is logged to the console
 
+      if(x === undefined){
+        console.log("Dor");
+        setErrorMessages('User name or password are incorrect')
+      }
+
       if (regex.test(x)) {
         console.log("The string contains a number as a substring");
       } else {
           console.log(typeof(x));
-          console.log((Object.entries(x).slice(0,1)));
+          // if (typeof(Object.entries(x)[0][0]) !== "number"){
+          //   const v = Object.entries(x)[0][1];
+          //   console.log(Object.entries(x)[0][1]);
+          //   console.log(v);
+          // }
           if(Object.entries(x).find(entry => typeof(entry[1]) === "number")) {
-            console.log(Object.entries(x)[0]);
+            console.log(Object.entries(x)[1]);
             console.log("shabat shalom");
-            y = Object.entries(x);
+            y =  Object.entries(x)[0][1];
             console.log(y);
             console.log("shabat shalom");
+            setGlobalVariable(y);
+            setIsSubmitted(true);
+          
           } else {
             console.log("The object does not contain the string 'John Doe'");
+            setErrorMessages('User name or password are incorrect')
           }
       }
 
       
     });
-  //  console.log(a)
-
-    
-
 
     
     // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-        setGlobalVariable(userData.user_id)
-      }
-    } else {
+    // if (userData) {
+    //   if (userData.password !== pass.value) {
+    //     // Invalid password
+    //    // setErrorMessages({ name: "pass", message: errors.pass });
+    //   } else {
+    //     //setIsSubmitted(true);
+    //     // console.log(y)
+    //     // setGlobalVariable(userData.user_id)
+    //   }
+    // } else {
       // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }
+      //setErrorMessages({ name: "uname", message: errors.uname });
+    //}
   };
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
+    //name === errorMessages.name && (
+      <div className="error">{errorMessages}</div>
+    //);
 
   // JSX code for login form
   const renderForm = (
@@ -110,7 +120,7 @@ export default function Union(props){
         <div className="input-container">
           <label>Username </label>
           <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
+          {/* {renderErrorMessage("uname")} */}
         </div>
         <div className="input-container">
           <label>Password </label>
