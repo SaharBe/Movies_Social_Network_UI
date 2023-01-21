@@ -56,7 +56,7 @@ export default function MyQuery(props){
                         .then(resp => setMovies(resp))
                         .catch( error => console.log(error) )
                 
-                    }, 5000)
+                    }, 1000)
                 
                     return () => clearInterval(intervalId); //This is important
     
@@ -99,7 +99,7 @@ export default function MyQuery(props){
             </Form>
 
             <div>
-             <MovieList userID={props.userID} movies={movies} />
+                {queryName ==='' || valueOfMovieID === '' ? <div><h3>Waiting for a filter option to be selected...</h3></div> :  <MovieList userID={props.userID} movies={movies} /> }
             </div>
         </div>
     )  

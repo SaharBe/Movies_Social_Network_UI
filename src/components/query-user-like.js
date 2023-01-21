@@ -63,7 +63,7 @@ export default function QueryUserLike(props){
                             .then(resp => setMovies(resp))
                             .catch( error => console.log(error) )
                     
-                        }, 5000)
+                        }, 1000)
                     
                         return () => clearInterval(intervalId); //This is important
         
@@ -111,7 +111,7 @@ export default function QueryUserLike(props){
             </Form>
 
             <div>
-            <h1>Similar List:</h1><MovieList userID={props.userID} movies={movies} />
+                {valueOfAnotherUser === '' || queryName === '' ? <div><h3>Waiting for a filter option to be selected...</h3></div> :  <MovieList userID={props.userID} movies={movies} /> }
             </div>
         </div>
     )  

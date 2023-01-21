@@ -59,7 +59,7 @@ export default function QueryMovieFeature(props){
                         .then(resp => setMovies(resp))
                         .catch( error => console.log(error) )
                 
-                    }, 5000)
+                    }, 100)
                 
                     return () => clearInterval(intervalId); //This is important
     
@@ -101,7 +101,7 @@ export default function QueryMovieFeature(props){
             </Form>
 
             <div>
-              <MovieList userID={props.userID} movies={movies} />
+                {queryName ==='' || input === '' ? <div><h3>Waiting for a filter option to be selected...</h3></div> :  <MovieList userID={props.userID} movies={movies} /> }
             </div>
         </div>
     )  
