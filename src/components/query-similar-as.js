@@ -56,7 +56,7 @@ export default function MyQuery(props){
                         .then(resp => setMovies(resp))
                         .catch( error => console.log(error) )
                 
-                    }, 100)
+                    }, 5000)
                 
                     return () => clearInterval(intervalId); //This is important
     

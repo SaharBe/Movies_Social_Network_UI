@@ -27,7 +27,7 @@ export default function QueryAllMovies(props){
                 .then(resp => setMovie(resp))
                 .catch( error => console.log(error) )
         
-            }, 100)
+            }, 5000)
         
             return () => clearInterval(intervalId); //This is important
         

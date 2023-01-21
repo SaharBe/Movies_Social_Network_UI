@@ -64,13 +64,17 @@
 
 
 .card {
-  background-color: rgb(26, 13, 100);
+  background-color: rgb(16, 47, 114);
   border-radius: 30px;
   margin-top: 20px;
-  margin-bottom: 40px;
+  width: 33%;
+  margin-bottom: 70px;
   padding: 25px 25px 15px 25px;
   transition: 0.3s;
-  color: rgb(211, 205, 205);
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  color: rgb(243, 237, 237);
 }
 
 
@@ -161,3 +165,6 @@ input[type="submit"]:hover {
   margin: 10px;
 }
 
+.hhh{
+  float:inherit;
+}

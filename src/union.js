@@ -13,45 +13,17 @@ export default function Union(props){
 
     const { globalVariable, setGlobalVariable } = React.useContext(UserId);
 
-    // const [userRequest, setUserRequest] = useState('');
     let x;
     var y;
     let regex = /\d+/;
 
-   // User Login info
-    // const database = [
-    // {
-    //     username: "user1",
-    //     password: "pass1",
-    //     user_id: "4"
-    // },
-    // {
-    //     username: "user2",
-    //     password: "pass2",
-    //     user_id: "3"
-    // },
-    // {
-    //     username: "junebug73",
-    //     password: "OHe6oMjK",
-    //     user_id: "2"
-    // }
-    // ];
-
-    // const errors = {
-    // uname: "invalid username",
-    // pass: "invalid password"
-    // };
 
  
-
     const handleSubmit = (event) => {
-    //Prevent page reload
+  
     event.preventDefault();
 
     var { uname, pass } = document.forms[0];
-
-    // Find user login info
-    //const userData = database.find((user) => user.username === uname.value);
 
     
     API.sendUserData(uname.value, pass.value).then(data => {
@@ -64,14 +36,10 @@ export default function Union(props){
       }
 
       if (regex.test(x)) {
-        console.log("The string contains a number as a substring");
+        //console.log("The string contains a number as a substring");
       } else {
           console.log(typeof(x));
-          // if (typeof(Object.entries(x)[0][0]) !== "number"){
-          //   const v = Object.entries(x)[0][1];
-          //   console.log(Object.entries(x)[0][1]);
-          //   console.log(v);
-          // }
+
           if(Object.entries(x).find(entry => typeof(entry[1]) === "number")) {
             console.log(Object.entries(x)[1]);
             console.log("shabat shalom");
@@ -82,7 +50,7 @@ export default function Union(props){
             setIsSubmitted(true);
           
           } else {
-            console.log("The object does not contain the string 'John Doe'");
+           // console.log("The object does not contain the string 'John Doe'");
             setErrorMessages('User name or password are incorrect')
           }
       }
@@ -90,21 +58,7 @@ export default function Union(props){
       
     });
 
-    
-    // Compare user info
-    // if (userData) {
-    //   if (userData.password !== pass.value) {
-    //     // Invalid password
-    //    // setErrorMessages({ name: "pass", message: errors.pass });
-    //   } else {
-    //     //setIsSubmitted(true);
-    //     // console.log(y)
-    //     // setGlobalVariable(userData.user_id)
-    //   }
-    // } else {
-      // Username not found
-      //setErrorMessages({ name: "uname", message: errors.uname });
-    //}
+
   };
 
   // Generate JSX code for error message
