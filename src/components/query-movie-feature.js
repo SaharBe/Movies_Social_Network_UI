@@ -17,6 +17,9 @@ export default function QueryMovieFeature(props){
     const [valueOfFeature,setValueOfFeature]=useState('');
     const [queryName, setQueryName]=useState('');
     const [ input, setInput] = useState('');
+    
+    const [isLoading, setIsLoading] = useState(false);
+    const [err, setErr] = useState('');
 
 
     const handleSelect=(e)=>{
@@ -40,40 +43,48 @@ export default function QueryMovieFeature(props){
         setInput(event.target.value);
     }
 
-    const SetQuery = ()  => {
-       
+
+    const handleClick = async () => {
+        setIsLoading(true);
+
         try{
-            useEffect(()=>{
+            
 
-                if(queryName !=='' && input !== '' ){
-    
-                    const intervalId = setInterval(() => {
-    
-                        fetch(`http://localhost:8080/movies/query-like?query_name=${queryName}&user_id=${props.userID}&input=${input}`, {
-                        method: 'GET',
-                        header:{
-                            'Content-Type': 'application/json'
-                        }
-                        })
-                        .then(resp => resp.json())
-                        .then(resp => setMovies(resp))
-                        .catch( error => console.log(error) )
-                
-                    }, 100)
-                
-                    return () => clearInterval(intervalId); //This is important
-    
-                }
-            },)      
+            const response = await fetch(`http://localhost:8080/movies/query-like?query_name=${queryName}&user_id=${props.userID}&input=${input}`, {
+                method: 'GET',
+                headers: {
+                Accept: 'application/json',
+                },
+            });
 
-        }catch(error){
-            return console.log(error);
-        }
-        
-    }
+            
+
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            console.log('result is: ', JSON.stringify(result, null, 4));
+
+            setMovies(result);
+
+
+        }catch(err){
+            setErr(err.message);
+        } finally {
+            setIsLoading(false);
+          }
+
+
+    };
+
+
 
     return(
         <div>
+            <div>{valueOfFeature}</div>
+            <div>{input}</div>
             <Form>
                 <DropdownButton 
                 className='mr-1'
@@ -97,7 +108,7 @@ export default function QueryMovieFeature(props){
                         ></input>
                 </div>
                 
-              <Button  variant="success" onClick={SetQuery()} >Choose feature</Button>{' '}
+              <Button  variant="success" onClick={handleClick} >Choose feature</Button>{' '}
             </Form>
 
             <div>

@@ -31,7 +31,7 @@ export default function Union(props){
       console.log(x); // the resolved value is logged to the console
 
       if(x === undefined){
-        console.log("Dor");
+        // console.log("Dor");
         setErrorMessages('User name or password are incorrect')
       }
 
@@ -42,10 +42,10 @@ export default function Union(props){
 
           if(Object.entries(x).find(entry => typeof(entry[1]) === "number")) {
             console.log(Object.entries(x)[1]);
-            console.log("shabat shalom");
+            //console.log("shabat shalom");
             y =  Object.entries(x)[0][1];
             console.log(y);
-            console.log("shabat shalom");
+            //console.log("shabat shalom");
             setGlobalVariable(y);
             setIsSubmitted(true);
           

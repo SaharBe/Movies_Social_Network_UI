@@ -13,7 +13,7 @@ import QueryMovieFeature from './query-movie-feature';
 export default function MoviesFilter(props){
 
     const [chosenFilter, setChosenFilter] = useState(0);
-    const lables = ["All movies",
+    const lables = ["Movies with full detais",
                     "Movies by feature", 
                     "Movies that are identical in a certain feature to a certain movie",
                     "Movies according to a certain user",
