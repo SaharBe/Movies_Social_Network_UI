@@ -16,6 +16,10 @@ export default function MyQuery(props){
     const [valueOfFeature,setValueOfFeature]=useState('');
     const [valueOfMovieID,setValueOfMovieID]=useState('');
     const [queryName, setQueryName]=useState('');
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [err, setErr] = useState('');
+
    
 
     const handleSelect=(e)=>{
@@ -37,37 +41,45 @@ export default function MyQuery(props){
         setValueOfMovieID(event.target.value);
     }
 
-    const SetQuery = ()  => {
+
+
+    const handleClick = async () => {
+        setIsLoading(true);
 
         try{
-            useEffect(()=>{
-
-                if(queryName !=='' && valueOfMovieID !== '' ){
-    
-                    const intervalId = setInterval(() => {
             
-                        fetch(`http://localhost:8080/movies/query?query_name=${queryName}&user_id=${props.userID}&input=${valueOfMovieID}`, {
-                        method: 'GET',
-                        header:{
-                            'Content-Type': 'application/json'
-                        }
-                        })
-                        .then(resp => resp.json())
-                        .then(resp => setMovies(resp))
-                        .catch( error => console.log(error) )
-                
-                    }, 1000)
-                
-                    return () => clearInterval(intervalId); //This is important
-    
-                }
-            },)   
 
-        }catch(error){
-            return console.log(error);
+            const response = await fetch(`http://localhost:8080/movies/query?query_name=${queryName}&user_id=${props.userID}&input=${valueOfMovieID}`, {
+                method: 'GET',
+                headers: {
+                Accept: 'application/json',
+                },
+            });
+
+            
+
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            console.log('result is: ', JSON.stringify(result, null, 4));
+
+            setMovies(result);
+
+
+        }catch(err){
+            setErr(err.message);
+        }finally {
+            setIsLoading(false);
         }
- 
-    }
+
+
+    };
+
+
+
 
    
     return(
@@ -95,7 +107,7 @@ export default function MyQuery(props){
                         ></input>
                 </div>
                 
-              <Button  variant="success" onClick={SetQuery()} >Choose feature</Button>{' '}
+              <Button  variant="success" onClick={handleClick} >Choose feature</Button>{' '}
             </Form>
 
             <div>

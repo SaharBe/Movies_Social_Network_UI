@@ -2,50 +2,60 @@ import React, { useState, useEffect } from 'react';
 import '../App.css'
 import MovieList from './movie-list';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Button from 'react-bootstrap/Button';
 
 export default function QueryAllMovies(props){
 
 
-    const [movies, setMovie] = useState([]);
+    const [movies, setMovies] = useState([]);
     const [query, setQuery] = useState('movieBasicQuery');
 
-    try{
-        useEffect(()=>{
+    const [isLoading, setIsLoading] = useState(false);
+    const [err, setErr] = useState('');
 
-       
 
-            const intervalId = setInterval(() => {
-        
-                fetch(`http://localhost:8080/movies/query-no-input?user_id=${props.userID}&query_name=movieBasicQuery`, {
-                method: 'GET',
-                header:{
-                    'Content-Type': 'application/json'
-                }
-                })
-                .then(resp => resp.json())
-                .then(resp => setMovie(resp))
-                .catch( error => console.log(error) )
-        
-            }, 1000)
-        
-            return () => clearInterval(intervalId); //This is important
-        
-          },)
+    const handleClick = async () => {
+        setIsLoading(true);
+
+
+        try{
             
-    }catch(error){
-        return console.log(error);
+
+            const response = await fetch(`http://localhost:8080/movies/query-no-input?user_id=${props.userID}&query_name=movieBasicQuery`, {
+                method: 'GET',
+                headers: {
+                Accept: 'application/json',
+                },
+            });
+
+            
+
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            console.log('result is: ', JSON.stringify(result, null, 4));
+
+            setMovies(result);
+
+
+        }catch(err){
+            setErr(err.message);
+        }finally {
+            setIsLoading(false);
+        }
+
     }
+
   
     return(
         <div>
+             <Button  variant="success" onClick={handleClick} >Click!</Button>
            <MovieList userID={props.userID} movies={movies} />
         </div> 
     )
     
-
-
-
-
 
 }

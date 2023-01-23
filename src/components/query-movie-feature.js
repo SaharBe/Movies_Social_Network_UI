@@ -72,9 +72,9 @@ export default function QueryMovieFeature(props){
 
         }catch(err){
             setErr(err.message);
-        } finally {
+        }finally {
             setIsLoading(false);
-          }
+        }
 
 
     };
