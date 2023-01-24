@@ -155,7 +155,7 @@ export default function Union(props){
               <Form.Control 
                 autoFocus
                 placeholder="Enter password"
-                type="text"
+                type="password"
                 onChange={handleInputNewPasswordChange}
               />
             </Form.Group>
