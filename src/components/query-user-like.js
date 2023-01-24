@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../App.css'
 import MovieList from './movie-list';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,7 +21,7 @@ export default function QueryUserLike(props){
     const [queryName, setQueryName]=useState('');
 
     const [isLoading, setIsLoading] = useState(false);
-    const [err, setErr] = useState('');
+    const [erre, setErr] = useState('');
 
 
     const handleSelect=(e)=>{
@@ -74,8 +74,10 @@ export default function QueryUserLike(props){
 
         }catch(err){
             setErr(err.message);
+            return erre;
         }finally {
             setIsLoading(false);
+            return isLoading;
         }
 
 
@@ -98,7 +100,7 @@ export default function QueryUserLike(props){
                     return(
                       <Dropdown.Item eventKey={movieField}>{movieField}</Dropdown.Item>)
                   })}
-                </DropdownButton>
+            </DropdownButton>
                 
                 <div xs={4}>
                         <input 

@@ -12,9 +12,30 @@ export class API {
 
                 },
             });
-            return await resp;
+            return await resp.json();
         } catch (error) {
             return console.log(error);
+        }
+    }
+
+    static async createNewUser(uname, pass){
+
+        var data = JSON.stringify({user_name: uname, password: pass});
+
+        try {
+            const resp = await fetch(backEndUrl+"/create-user", {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+
+                },
+                body: data
+            });
+            return await resp.json();
+        } catch (error) {
+            console.log(error);
+            return 404;
+            
         }
     }
 

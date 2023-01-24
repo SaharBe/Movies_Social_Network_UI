@@ -2,8 +2,8 @@
   padding: 20px;
   min-height: 100vh;
   text-align: center;
-  background-color: white;
-  color: black;
+  background-color: rgba(29, 24, 24, 0.966);
+  color: rgba(255, 255, 255, 0.849);
 }
 
 
@@ -12,8 +12,8 @@
   justify-content: center;
   text-align: center;
   font-size: calc(10px + 2vmin);
- 
-  color: black;
+  background-color: rgba(29, 24, 24, 0.966);
+  color: rgba(255, 255, 255, 0.849);
   
 }
 
@@ -64,7 +64,7 @@
 
 
 .card {
-  background-color: rgb(16, 47, 114);
+  background-color: rgb(225, 247, 245);
   border-radius: 30px;
   margin-top: 20px;
   width: 33%;
@@ -74,7 +74,7 @@
   align-items: center;
   justify-content: center;
   margin: auto;
-  color: rgb(243, 237, 237);
+  color: rgba(0, 0, 0, 0.897);
 }
 
 
@@ -167,4 +167,8 @@ input[type="submit"]:hover {
 
 .hhh{
   float:inherit;
+}
+
+.rows .row {
+  display: inline-block;
 }

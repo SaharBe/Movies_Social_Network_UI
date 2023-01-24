@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import '../App.css'
-import Table from 'react-bootstrap/Table'
+import '../App.css';
+import Table from 'react-bootstrap/Table';
 import { API } from '../rest-api-service';
 import { List, AutoSizer, CellMeasurer, CellMeasurerCache} from "react-virtualized";
 import './temp.css'
@@ -41,7 +41,7 @@ function MovieList(props){
    //// <div>{console.log(props.movies)}<div>{props.movies.length}</div><div></div>  <div>{intArray.toString()}</div> <div>{boolArray.toString()}</div>
 
     return(<div>
-            <div>{props.movies.length === 0 ? <div><h1>Loading...</h1></div> : <div>ITS full</div>}</div>
+            <div>{props.movies.length === 0 ? <div><h3>No movies in this filter...</h3></div> : <div></div>}</div>
     <div style={{width: "100%", height: "100vh"}}>
         <AutoSizer>
             {({width, height}) =>  <List 
